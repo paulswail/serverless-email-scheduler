@@ -1,5 +1,8 @@
 # Serverless Task Scheduler
-Schedule future tasks from your app using AWS Lambda, DynamoDB and SNS.
+Schedule future tasks from your app using AWS Lambda and SNS.
+
+Question: do we need to use DynamoDB or could Step Functions be used instead?
+https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html
 
 TODO: link to blog article.
 

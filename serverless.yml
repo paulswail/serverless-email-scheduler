@@ -5,10 +5,6 @@ provider:
   runtime: nodejs8.10
   region: eu-west-1
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -76,12 +72,29 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
+# resources:
+#   Resources:
+#     ScheduledTasksTable:
+#       Type: "AWS::DynamoDB::Table"
+#       Properties:
+#         TableName: ScheduledTasksTable
+#         AttributeDefinitions:
+#           -
+#             AttributeName: "partitionKey"
+#             AttributeType: "S"
+#           -
+#             AttributeName: "sortKey"
+#             AttributeType: "S"
+#         KeySchema:
+#           -
+#             AttributeName: "partitionKey"
+#             KeyType: "HASH"
+#           -
+#             AttributeName: "sortKey"
+#             KeyType: "RANGE"
+#         ProvisionedThroughput:
+#           ReadCapacityUnits: 2
+#           WriteCapacityUnits: 2
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"

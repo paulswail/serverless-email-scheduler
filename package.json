@@ -1,0 +1,21 @@
+{
+  "name": "serverless-task-scheduler",
+  "version": "1.0.0",
+  "description": "Schedule future tasks with Lambda",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serverless",
+    "lambda",
+    "scheduler"
+  ],
+  "author": "Paul Swail",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

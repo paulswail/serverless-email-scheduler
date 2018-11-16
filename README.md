@@ -1,5 +1,5 @@
 # Serverless Email Scheduler
-Schedule future emails from your app using AWS Lambda and SNS.
+Schedule future emails from your app using AWS Lambda and Step Functions.
 
 TODO: link to blog article.
 

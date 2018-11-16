@@ -7,6 +7,7 @@ module.exports.handle = async (event, context) => {
     const stateMachineArn = process.env.statemachine_arn;
     const result = await stepfunctions.startExecution({
         stateMachineArn,
+        input: JSON.stringify(event),
     }).promise();
     console.log(`Your statemachine ${stateMachineArn} executed successfully`, result);
     return result;

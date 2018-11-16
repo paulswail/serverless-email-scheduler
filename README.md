@@ -1,5 +1,5 @@
-# Serverless Task Scheduler
-Schedule future tasks from your app using AWS Lambda and SNS.
+# Serverless Email Scheduler
+Schedule future emails from your app using AWS Lambda and SNS.
 
 TODO: link to blog article.
 

@@ -1,7 +1,7 @@
 {
   "name": "serverless-email-scheduler",
   "version": "0.1.0",
-  "description": "Schedule future emails with Lambda",
+  "description": "Schedule future emails with AWS Lambda and Step Functions",
   "main": "handler.js",
   "scripts": {
     "deploy": "sls deploy -v",

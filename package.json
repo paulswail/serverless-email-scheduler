@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Schedule future tasks with Lambda",
   "main": "handler.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [
     "serverless",
     "lambda",
@@ -14,9 +12,10 @@
   "author": "Paul Swail",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^5.8.0",
+    "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "serverless": "^1.33.1"
   },
   "dependencies": {
     "moment": "^2.22.2"

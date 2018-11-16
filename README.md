@@ -9,6 +9,22 @@ TODO: link to blog article.
 ## Use Case
 A new user signs up for your app. You want to schedule an on-boarding email to go out to them next week.
 
+## Install
+TODO: prereqs
+
+## Run it
+Deploy:
+
+```
+npx sls deploy -v
+```
+
+Invoke:
+```
+sls invoke -f schedule-task -l
+```
+
+
 ## How it works
 1. Your app calls ScheduleTask Lambda, passing in:
   - `scheduledDate`: date when the task should be processed

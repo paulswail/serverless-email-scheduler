@@ -1,12 +1,10 @@
 {
-    "taskType": "SendEmail",
-    "dueDate": "2018-11-16T13:00:25.000Z",
-    "taskData": {
-        "email": {
-            "to": ["paul+testing@winterwindsoftware.com"],
-            "subject": "testing step function scheduling",
-            "textBody": "TEXT body.\nsecond line.",
-            "htmlBody": "<strong>HTML</strong> body<br>second line."
-        }
-    }
+    "dueDate": "2018-11-16T13:55:25.000Z",
+    "email": {
+        "to": ["paul+testing@winterwindsoftware.com"],
+        "subject": "testing step function scheduling",
+        "textBody": "TEXT body.\nsecond line.",
+        "htmlBody": "<strong>HTML</strong> body<br>second line."
+    },
+    "appendScheduleDateToBody": true
 }

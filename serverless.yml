@@ -12,7 +12,7 @@ provider:
       Action:
         - "states:StartExecution"
       Resource:
-        - Ref: TaskSchedulingStateMachine
+        - Ref: EmailSchedulingStateMachine
     - Effect: "Allow"
       Action:
         - "ses:SendEmail"
@@ -25,38 +25,38 @@ package:
   individually: true
 
 functions:
-  ScheduleTask:
-    handler: src/lambdas/schedule-task.handle
+  ScheduleEmail:
+    handler: src/lambdas/schedule-email.handle
     environment:
-      STATEMACHINE_ARN: ${self:resources.Outputs.TaskSchedulingStateMachine.Value}
-  TriggerTask:
-    handler: src/lambdas/trigger-task.handle
+      STATEMACHINE_ARN: ${self:resources.Outputs.EmailSchedulingStateMachine.Value}
+  SendEmail:
+    handler: src/lambdas/send-email.handle
     environment:
       EMAIL_SENDER_ADDRESS: ${self:custom.EMAIL_SENDER_ADDRESS}
 
 stepFunctions:
   stateMachines:
-    TaskSchedulingStateMachine:
-      name: TaskSchedulingStateMachine
+    EmailSchedulingStateMachine:
+      name: EmailSchedulingStateMachine
       definition:
-        Comment: "Schedules a task to be completed at a future date"
+        Comment: "Schedules an email to be sent at a future date"
         StartAt: WaitForDueDate
         States:
           WaitForDueDate:
             Type: Wait
             TimestampPath: "$.dueDate"
-            Next: TriggerTask
-          TriggerTask:
+            Next: SendEmail
+          SendEmail:
             Type: Task
-            Resource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-TriggerTask"
+            Resource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-SendEmail"
             End: true
 
 resources:
   Outputs:
-    TaskSchedulingStateMachine:
-      Description: The ARN of the TaskSchedulingStateMachine
+    EmailSchedulingStateMachine:
+      Description: The ARN of the EmailSchedulingStateMachine
       Value:
-        Ref: TaskSchedulingStateMachine
+        Ref: EmailSchedulingStateMachine
 
 plugins:
   - serverless-step-functions

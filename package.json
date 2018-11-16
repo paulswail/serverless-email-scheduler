@@ -5,10 +5,10 @@
   "main": "handler.js",
   "scripts": {
     "deploy": "sls deploy -v",
-    "invoke": "sls invoke -f ScheduleTask -l -p ./data/task-request.json",
+    "invoke": "sls invoke -f ScheduleEmail -l -p ./data/task-request.json",
     "deployinvoke": "npm run deploy && npm run invoke",
     "lint": "eslint . || true",
-    "logs": "sls logs -f TriggerTask"
+    "logs": "sls logs -f SendEmail"
   },
   "keywords": [
     "serverless",

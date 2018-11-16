@@ -5,7 +5,11 @@ const ses = new AWS.SES();
 const { EMAIL_SENDER_ADDRESS } = process.env;
 
 module.exports.handle = async (event) => {
-    const result = await sendEmail(event.taskData.email);
+    const email = Object.assign(event.taskData.email,
+        {
+            htmlBody: `${event.taskData.email.htmlBody}<br>Scheduled to be sent at: ${event.dueDate}`,
+        });
+    const result = await sendEmail(email);
     console.log('Sent email successfully', result);
     return result;
 };

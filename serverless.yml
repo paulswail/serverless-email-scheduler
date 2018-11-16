@@ -18,24 +18,28 @@ package:
   individually: true
 
 functions:
-  hello:
-    handler: src/lambdas/hello.handle
-  schedule-task:
+  ScheduleTask:
     handler: src/lambdas/schedule-task.handle
     environment:
       statemachine_arn: ${self:resources.Outputs.TaskSchedulingStateMachine.Value}
+  TriggerTask:
+    handler: src/lambdas/trigger-task.handle
 
 stepFunctions:
   stateMachines:
-    hellostepfunc1:
+    TaskSchedulingStateMachine:
       name: TaskSchedulingStateMachine
       definition:
-        Comment: "A Hello World example of the Amazon States Language using an AWS Lambda Function"
-        StartAt: HelloWorld1
+        Comment: "Schedules a task to be completed at a future date"
+        StartAt: WaitForDueDate
         States:
-          HelloWorld1:
+          WaitForDueDate:
+            Type: Wait
+            Seconds: 10
+            Next: TriggerTask
+          TriggerTask:
             Type: Task
-            Resource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-hello"
+            Resource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-TriggerTask"
             End: true
 
 resources:

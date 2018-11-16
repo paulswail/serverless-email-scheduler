@@ -17,7 +17,9 @@
     "eslint-plugin-import": "^2.14.0",
     "serverless": "^1.33.1",
     "serverless-pseudo-parameters": "^2.2.0",
-    "serverless-step-functions": "^1.8.0"
+    "serverless-step-functions": "^1.8.0",
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.25.1"
   },
   "dependencies": {
     "aws-sdk": "^2.357.0",

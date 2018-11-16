@@ -1,7 +1,7 @@
 {
-  "name": "serverless-user-task-scheduler",
-  "version": "1.0.0",
-  "description": "Schedule future tasks with Lambda",
+  "name": "serverless-email-scheduler",
+  "version": "0.1.0",
+  "description": "Schedule future emails with Lambda",
   "main": "handler.js",
   "scripts": {
     "deploy": "sls deploy -v",

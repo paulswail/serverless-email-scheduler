@@ -1,4 +1,4 @@
-service: serverless-user-task-scheduler
+service: serverless-email-scheduler
 
 provider:
   name: aws

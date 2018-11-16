@@ -2,13 +2,13 @@ const AWS = require('aws-sdk');
 
 const stepfunctions = new AWS.StepFunctions();
 
-module.exports.handle = async (event, context) => {
+module.exports.handle = async (event) => {
     console.log('Starting ScheduleTask...', event);
-    const stateMachineArn = process.env.statemachine_arn;
+    const stateMachineArn = process.env.STATEMACHINE_ARN;
     const result = await stepfunctions.startExecution({
         stateMachineArn,
         input: JSON.stringify(event),
     }).promise();
-    console.log(`Your statemachine ${stateMachineArn} executed successfully`, result);
+    console.log(`State machine ${stateMachineArn} executed successfully`, result);
     return result;
 };

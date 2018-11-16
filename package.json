@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "Schedule future tasks with Lambda",
   "main": "handler.js",
-  "scripts": {},
+  "scripts": {
+    "deploy": "sls deploy -v",
+    "invoke": "sls invoke -f ScheduleTask -l -p ./data/task-request.json",
+    "deployinvoke": "npm run deploy && npm run invoke",
+    "lint": "eslint . || true"
+  },
   "keywords": [
     "serverless",
     "lambda",

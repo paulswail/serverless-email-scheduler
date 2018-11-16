@@ -21,9 +21,11 @@ functions:
   ScheduleTask:
     handler: src/lambdas/schedule-task.handle
     environment:
-      statemachine_arn: ${self:resources.Outputs.TaskSchedulingStateMachine.Value}
+      STATEMACHINE_ARN: ${self:resources.Outputs.TaskSchedulingStateMachine.Value}
   TriggerTask:
     handler: src/lambdas/trigger-task.handle
+    environment:
+      EMAIL_SENDER_ADDRESS: paul@winterwindsoftware.com
 
 stepFunctions:
   stateMachines:
@@ -35,7 +37,7 @@ stepFunctions:
         States:
           WaitForDueDate:
             Type: Wait
-            Seconds: 10
+            TimestampPath: "$.dueDate"
             Next: TriggerTask
           TriggerTask:
             Type: Task

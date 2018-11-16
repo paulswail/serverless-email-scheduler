@@ -3,9 +3,10 @@
     "dueDate": "2018-11-16T13:00:25.000Z",
     "taskData": {
         "email": {
-            "to": "paul+testing@winterwindsoftware.com",
+            "to": ["paul+testing@winterwindsoftware.com"],
             "subject": "testing step function scheduling",
-            "body": "test body"
+            "textBody": "TEXT body.\nsecond line.",
+            "htmlBody": "<strong>HTML</strong> body<br>second line.",
         }
     }
 }

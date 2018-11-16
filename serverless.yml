@@ -4,6 +4,9 @@ provider:
   name: aws
   runtime: nodejs8.10
   region: eu-west-1
+  stage: dev
+  # change this to use your own profile (https://serverless.com/framework/docs/providers/aws/guide/credentials#using-aws-profiles)
+  profile: winterwind_serverless_deployer
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:

@@ -8,97 +8,34 @@ provider:
   # change this to use your own profile (https://serverless.com/framework/docs/providers/aws/guide/credentials#using-aws-profiles)
   profile: winterwind_serverless_deployer
 
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
-
 functions:
+  hello:
+    handler: src/lambdas/hello.handle
   schedule-task:
     handler: src/lambdas/schedule-task.handle
+    environment:
+      statemachine_arn: ${self:resources.Outputs.TaskSchedulingStateMachine.Value}
 
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
-#      - s3: ${env:BUCKET}
-#      - schedule: rate(10 minutes)
-#      - sns: greeter-topic
-#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
-#      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx
-#      - alexaSmartHome: amzn1.ask.skill.xx-xx-xx-xx
-#      - iot:
-#          sql: "SELECT * FROM 'some_topic'"
-#      - cloudwatchEvent:
-#          event:
-#            source:
-#              - "aws.ec2"
-#            detail-type:
-#              - "EC2 Instance State-change Notification"
-#            detail:
-#              state:
-#                - pending
-#      - cloudwatchLog: '/aws/lambda/hello'
-#      - cognitoUserPool:
-#          pool: MyUserPool
-#          trigger: PreSignUp
+stepFunctions:
+  stateMachines:
+    hellostepfunc1:
+      name: TaskSchedulingStateMachine
+      definition:
+        Comment: "A Hello World example of the Amazon States Language using an AWS Lambda Function"
+        StartAt: HelloWorld1
+        States:
+          HelloWorld1:
+            Type: Task
+            Resource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-${opt:stage}-hello"
+            End: true
 
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
+resources:
+  Outputs:
+    TaskSchedulingStateMachine:
+      Description: The ARN of the TaskSchedulingStateMachine
+      Value:
+        Ref: TaskSchedulingStateMachine
 
-# you can add CloudFormation resource templates here
-# resources:
-#   Resources:
-#     ScheduledTasksTable:
-#       Type: "AWS::DynamoDB::Table"
-#       Properties:
-#         TableName: ScheduledTasksTable
-#         AttributeDefinitions:
-#           -
-#             AttributeName: "partitionKey"
-#             AttributeType: "S"
-#           -
-#             AttributeName: "sortKey"
-#             AttributeType: "S"
-#         KeySchema:
-#           -
-#             AttributeName: "partitionKey"
-#             KeyType: "HASH"
-#           -
-#             AttributeName: "sortKey"
-#             KeyType: "RANGE"
-#         ProvisionedThroughput:
-#           ReadCapacityUnits: 2
-#           WriteCapacityUnits: 2
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+plugins:
+  - serverless-step-functions
+  - serverless-pseudo-parameters

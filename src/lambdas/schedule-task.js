@@ -1,10 +1,13 @@
+const AWS = require('aws-sdk');
+
+const stepfunctions = new AWS.StepFunctions();
 
 module.exports.handle = async (event, context) => {
-    return {
-        statusCode: 200,
-        body: JSON.stringify({
-            message: 'Go Serverless v1.0! Your function executed successfully!',
-            input: event,
-        }),
-    };
+    console.log('Starting ScheduleTask...', event);
+    const stateMachineArn = process.env.statemachine_arn;
+    const result = await stepfunctions.startExecution({
+        stateMachineArn,
+    }).promise();
+    console.log(`Your statemachine ${stateMachineArn} executed successfully`, result);
+    return result;
 };

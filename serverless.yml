@@ -13,6 +13,13 @@ provider:
         - "states:StartExecution"
       Resource:
         - Ref: TaskSchedulingStateMachine
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource: arn:aws:ses:#{AWS::Region}:#{AWS::AccountId}:identity/${self:custom.EMAIL_SENDER_ADDRESS}
+
+custom:
+  EMAIL_SENDER_ADDRESS: "paul@winterwindsoftware.com"
 
 package:
   individually: true
@@ -25,7 +32,7 @@ functions:
   TriggerTask:
     handler: src/lambdas/trigger-task.handle
     environment:
-      EMAIL_SENDER_ADDRESS: paul@winterwindsoftware.com
+      EMAIL_SENDER_ADDRESS: ${self:custom.EMAIL_SENDER_ADDRESS}
 
 stepFunctions:
   stateMachines:

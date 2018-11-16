@@ -7,7 +7,8 @@
     "deploy": "sls deploy -v",
     "invoke": "sls invoke -f ScheduleTask -l -p ./data/task-request.json",
     "deployinvoke": "npm run deploy && npm run invoke",
-    "lint": "eslint . || true"
+    "lint": "eslint . || true",
+    "logs": "sls logs -f TriggerTask"
   },
   "keywords": [
     "serverless",

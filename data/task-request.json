@@ -6,7 +6,7 @@
             "to": ["paul+testing@winterwindsoftware.com"],
             "subject": "testing step function scheduling",
             "textBody": "TEXT body.\nsecond line.",
-            "htmlBody": "<strong>HTML</strong> body<br>second line.",
+            "htmlBody": "<strong>HTML</strong> body<br>second line."
         }
     }
 }

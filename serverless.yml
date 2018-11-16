@@ -7,6 +7,12 @@ provider:
   stage: dev
   # change this to use your own profile (https://serverless.com/framework/docs/providers/aws/guide/credentials#using-aws-profiles)
   profile: winterwind_serverless_deployer
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "states:StartExecution"
+      Resource:
+        - Ref: TaskSchedulingStateMachine
 
 package:
   individually: true
